@@ -188,11 +188,10 @@ RC myv::MyVector::foreach(const std::function<void(double)> &fun) const
 	return RC::SUCCESS;
 }
 
-// Возможно стоит поправить
 myv::MyVector::~MyVector() noexcept
 {
-	double* data = mutableData();
-	delete[] data;
+	//double* data = mutableData();
+	//delete[] data;
 }
 
 

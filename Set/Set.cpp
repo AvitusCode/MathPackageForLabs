@@ -218,7 +218,7 @@ ISet* ISet::sub(const ISet *const &op1, const ISet *const &op2, IVector::NORM n,
 		}
 	}
     
-    delete vec;
+    //delete vec;
     return result;
 }
 

@@ -1,6 +1,7 @@
 #include "SetImpl.h"
-#include "../support_func.h"
 #include <cmath>
+
+#include "../support_func.h"
 
 // Set implementation
 ILogger *SetImpl::sLogger = nullptr;
@@ -27,6 +28,7 @@ ISet *SetImpl::clone() const
     {
         if (sLogger)
         	sLogger->sever(RC::ALLOCATION_ERROR, __FILE__, __func__, __LINE__);
+        
         delete Set;
         return nullptr;
     }
@@ -36,6 +38,7 @@ ISet *SetImpl::clone() const
     {
         if (sLogger)
         	sLogger->sever(RC::ALLOCATION_ERROR, __FILE__, __func__, __LINE__);
+        
         delete Set;
         return nullptr;
     }
@@ -130,8 +133,6 @@ RC SetImpl::findFirstAndCopy(const IVector *const &pat, IVector::NORM n, double 
     if (IVector::equals(buffer, pat, n, tol)) 
     {
         val = buffer;
-        if (sLogger)
-        	
         return RC::SUCCESS;
     }
 
@@ -154,7 +155,6 @@ RC SetImpl::findFirstAndCopy(const IVector *const &pat, IVector::NORM n, double 
         }
     }
 
-    delete buffer;
     return RC::VECTOR_NOT_FOUND;
 }
 
@@ -259,7 +259,7 @@ RC SetImpl::insertFirst(const IVector *const &val)
         return RC::ALLOCATION_ERROR;
     }
     
-    support::fill(indexes, indexes + MAX_ALLOC * sizeof(size_t), 0);
+    support::fill(indexes, indexes + MAX_ALLOC, 0);
     lastIndex = 0;
     dim = val->getDim();
     size = 1;
@@ -502,7 +502,7 @@ ISet::IIterator* SetImpl::Iterator::makeIterator(std::shared_ptr<ISetControlBloc
         return nullptr;
     }
 
-    support::fill(buff, buff + dim * sizeof(double), 0);
+    std::fill(buff, buff + dim, 0);
 
     IVector* buffer = IVector::createVector(dim, buff);
     delete buff;

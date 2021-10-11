@@ -93,7 +93,7 @@ bool IVector::equals(const IVector *const &op1, const IVector *const &op2, NORM 
 	if ((!op1 || !op2) || op1->getDim() != op2->getDim())
 		return false;
 	
-    return (op1->norm(n) - op2->norm(n)) < tol;
+    return std::fabs(op1->norm(n) - op2->norm(n)) < tol;
 }
 
 RC IVector::setLogger(ILogger *const logger)

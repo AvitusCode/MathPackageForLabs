@@ -1,6 +1,5 @@
 #include "CompactImpl.h"
 #include "../support_func.h"
-
 // Compact implementation
 
 ILogger* CompactImpl::cLogger = nullptr;
@@ -78,7 +77,7 @@ RC CompactImpl::getVectorCopy(IMultiIndex const *index, IVector *&val) const
 	return RC::SUCCESS;
 }
 
-RC CompactImpl::getVectorCoords(IMultiIndex const *index, IVector *const&val) const
+RC CompactImpl::getVectorCoords(IMultiIndex const *index, IVector *const& val) const
 {
 	if (!index || !val)
 	{
@@ -117,7 +116,7 @@ RC CompactImpl::getVectorCoords(IMultiIndex const *index, IVector *const&val) co
 		const double param = static_cast<double>(pindex[i])
 				/ (static_cast<double>(pgrid[i]) - 1.0);
 
-		val->setCord(i,(1.0 - param) * pleftBorder[i] + param * prightBorder[i]); // (1-liambda)*a + liambda*b in [a, b], liambda in [0, 1]
+		val->setCord(i, (1.0 - param) * pleftBorder[i] + param * prightBorder[i]); // (1-liambda)*a + liambda*b in [a, b], liambda in [0, 1]
 	}
 
 	return RC::SUCCESS;
@@ -229,7 +228,7 @@ ICompact::IIterator* CompactImpl::getBegin(IMultiIndex const *const& bypassOrder
 	    return nullptr;
 	}
 	
-	support::fill(buffer, buffer + dim * sizeof(size_t), 1);
+	support::fill(buffer, buffer + dim, 1);
 	IMultiIndex* index = IMultiIndex::createMultiIndex(dim, buffer);
 	delete[] buffer;
 	
